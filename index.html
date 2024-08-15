@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Toast Notifications</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Estilo básico da página e botões */
+    body {
+      margin: 0;
+      padding: 20px;
+      background-color: #f4f4f4;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 12rem auto;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+    }
+
+    .button {
+      display: inline-block;
+      margin: 10px;
+      font-size: 1rem;
+      cursor: pointer;
+      border: none;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div>
+      <button class="button" onclick="toast.default('Event has been created')">Default</button>
+      <button class="button" onclick="toast.message('Event has been created', { description: 'Monday, January 3rd at 6:00pm' })">Description</button>
+      <button class="button" onclick="toast.success('Event has been created', { richColors: true })">Success</button>
+      <button class="button" onclick="toast.info('Be at the area 10 minutes before the event time', { richColors: true })">Info</button>
+      <button class="button" onclick="toast.warning('Event start time cannot be earlier than 8am', { richColors: true })">Warning</button>
+      <button class="button" onclick="toast.error('Event has not been created', { richColors: true })">Error</button>
+      <button class="button" onclick="toast.default('Event has been created', { action: { label: 'Undo', onClick: () => console.log('Undo') } })">Action</button>
+      <button class="button" onclick="triggerPromise()">Promise</button>
+      <button class="button" onclick="toast.custom('<div>A custom toast with default styling</div>')">Custom</button>
+    </div>
+  </div>
+
+  <!-- Wrapper necessário para os toasts -->
+  <div id="toaster-wrapper" data-rich-colors="true" data-expand="false" data-position="top-left"></div>
+
+  <!-- Carregando o script do toaster -->
+  <script src="toaster.js"></script>
+
+  <!-- Script específico da página -->
+  <script>
+    function triggerPromise() {
+      const promise = () => new Promise((resolve) => setTimeout(() => resolve({ name: 'Sonner' }), 2000));
+      toast.promise(promise(), {
+        loading: 'Loading...',
+        success: (data) => `${data.name} toast has been added`,
+        error: 'Error',
+      });
+    }
+
+    // Exemplo de toasts automáticos
+    toast.success('This is a success message!', {
+      position: 'top-center'
+    });
+
+    toast.error('This is an error message!', {
+      position: 'bottom-left'
+    });
+
+    toast.info('This is an info message!', {
+      position: 'top-right',
+      action: {
+        label: 'Retry',
+        onClick: () => console.log('Retry clicked')
+      }
+    });
+  </script>
+</body>
+</html>
