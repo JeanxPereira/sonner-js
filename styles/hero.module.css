@@ -1,0 +1,150 @@
+.hero-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  align-items: center;
+}
+
+.hero-toastWrapper {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  height: 10rem;
+  width: 40rem;
+  position: relative;
+  mask-image: linear-gradient(to top, transparent 0%, black 35%);
+  opacity: 1;
+}
+
+.hero-toast {
+  width: 35.6rem;
+  height: 4rem;
+  background: var(--gray0);
+  box-shadow: 0 .4rem 1.2rem #0000001a;
+  border: .1rem solid var(--gray3);
+  border-radius: .6rem;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.hero-toast:nth-child(1) {
+  transform: translateY(-60%) translateX(-50%) scale(0.9);
+}
+
+.hero-toast:nth-child(2) {
+  transform: translateY(-30%) translateX(-50%) scale(0.95);
+}
+
+.hero-buttons {
+  display: flex;
+  gap: .8rem;
+}
+
+.hero-button {
+  height: 4.0rem;
+  border-radius: .6rem;
+  border: none;
+  background: linear-gradient(156deg, rgba(255, 255, 255, 1) 0%, rgba(240, 240, 240, 1) 100%);
+  /* padding: 0 30rem; */
+  font-weight: 600;
+  flex-shrink: 0;
+  font-family: inherit;
+  box-shadow:
+    0rem 0rem 0rem .1rem rgba(0, 0, 0, 0.06),
+    0rem .1rem 0rem 0rem rgba(0, 0, 0, 0.08),
+    0rem .2rem .2rem 0rem rgba(0, 0, 0, 0.04),
+    0rem .3rem .3rem 0rem rgba(0, 0, 0, 0.02),
+    0rem .4rem .4rem 0rem rgba(0, 0, 0, 0.01);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  text-decoration: none;
+  color: hsl(0, 0%, 9%);
+  font-size: 1.3rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    box-shadow 200ms,
+    background 200ms;
+  width: 15.2rem;
+}
+
+.hero-button[data-primary] {
+  box-shadow: 0rem 0rem 0rem .1rem var(--gray12);
+  background: var(--gray12);
+  color: var(--gray1);
+}
+.hero-button:focus-visible {
+  outline: none;
+  box-shadow:
+    0rem 0rem 0rem .1rem rgba(0, 0, 0, 0.06),
+    0rem .1rem 0rem 0rem rgba(0, 0, 0, 0.08),
+    0rem .2rem .2rem 0rem rgba(0, 0, 0, 0.04),
+    0rem .3rem .3rem 0rem rgba(0, 0, 0, 0.02),
+    0rem .4rem .4rem 0rem rgba(0, 0, 0, 0.01),
+    0 0 0 .2rem rgba(0, 0, 0, 0.15);
+}
+
+.hero-button:after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  background: blue;
+  left: 0;
+  width: 100%;
+  height: 35%;
+  background: linear-gradient(
+    to top,
+    hsl(0, 0%, 91%) 0%,
+    hsla(0, 0%, 91%, 0.987) 8.1%,
+    hsla(0, 0%, 91%, 0.951) 15.5%,
+    hsla(0, 0%, 91%, 0.896) 22.5%,
+    hsla(0, 0%, 91%, 0.825) 29%,
+    hsla(0, 0%, 91%, 0.741) 35.3%,
+    hsla(0, 0%, 91%, 0.648) 41.2%,
+    hsla(0, 0%, 91%, 0.55) 47.1%,
+    hsla(0, 0%, 91%, 0.45) 52.9%,
+    hsla(0, 0%, 91%, 0.352) 58.8%,
+    hsla(0, 0%, 91%, 0.259) 64.7%,
+    hsla(0, 0%, 91%, 0.175) 71%,
+    hsla(0, 0%, 91%, 0.104) 77.5%,
+    hsla(0, 0%, 91%, 0.049) 84.5%,
+    hsla(0, 0%, 91%, 0.013) 91.9%,
+    hsla(0, 0%, 91%, 0) 100%
+  );
+  opacity: 0.6;
+  transition: transform 200ms;
+}
+
+.hero-button:hover:not([data-primary]):after {
+  transform: translateY(-100%);
+}
+
+.hero-button[data-primary]:hover {
+  background: var(--hover);
+}
+
+.hero-heading {
+  font-size: 4.8rem;
+  font-weight: 700;
+  margin: -2rem 0 1.2rem;
+}
+
+.hero-wrapper p {
+  margin-bottom: 1.2rem;
+}
+
+@media (max-width: 60rem) {
+  .hero-toastWrapper {
+    width: 100%;
+  }
+}
+
+.hero-link {
+  color: var(--gray11) !important;
+  font-size: 1.4rem;
+  text-decoration: underline;
+}

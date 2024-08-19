@@ -187,8 +187,9 @@ function createToast(message, { description, type, action, position } = {}) {
   const { toast, id } = renderToast(list, message, { description, type, action, position: toastPosition });
 
   setTimeout(() => {
-    const el = list.children[0];
-    const height = el.getBoundingClientRect().height;
+    if (list.children.length > 0) {
+      const el = list.children[0];
+      const height = el.getBoundingClientRect().height;
 
     el.setAttribute('data-mounted', 'true');
     el.setAttribute('data-initial-height', `${height}`);
@@ -201,6 +202,7 @@ function createToast(message, { description, type, action, position } = {}) {
 
     refreshProperties();
     registerRemoveTimeout(el);
+  }
   }, 16);
 
   return { toast, id };
@@ -469,11 +471,11 @@ const toast = {
 window.toast = toast;
 
 // Exemplo de inicialização (coloque isso onde for necessário)
-document.addEventListener('DOMContentLoaded', () => {
+/* document.addEventListener('DOMContentLoaded', () => {
   toast.success('This is a success message!');
   toast.error('This is an error message!');
   toast.info('This is an info message!');
   toast.warning('This is a warning message!');
 });
 
-document.head.appendChild(style);
+document.head.appendChild(style); */

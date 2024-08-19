@@ -1,0 +1,21 @@
+.copy-button {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 1;
+  cursor: pointer;
+  border-radius: 50%;
+  border: .1rem solid var(--gray4);
+  background: #fff;
+  color: var(--gray12);
+  border-radius: .5rem;
+  width: 2.6rem;
+  height: 2.6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.copy-button div {
+  display: flex;
+}

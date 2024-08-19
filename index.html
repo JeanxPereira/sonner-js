@@ -1,86 +1,186 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Toast Notifications</title>
-  <link rel="stylesheet" href="style.css">
-  <style>
-    /* Estilo básico da página e botões */
-    body {
-      margin: 0;
-      padding: 20px;
-      background-color: #f4f4f4;
-    }
+<html lang="pt-BR">
+  <head>
+    <!-- META -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- DESCRIPTION -->
+    <meta name="description" content="An opinionated toast component for Vanilla HTML/JS." />
+    <meta name="og:description" content="An opinionated toast component for Vanilla HTML/JS." />
+    <!-- TITLE -->
+    <title>sonner-js</title>
+    <meta name="og:title" content="Sonner JS" />
+    <!-- IMAGE -->
+    <meta name="twitter:image" content={ogImage} />
+    <meta name="og:image" content={ogImage} />
+    <!-- URL -->
+    <meta name="og:url" content="https://sonner.emilkowal.ski/" />
+    <!-- GENERAL -->
+    <meta httpEquiv="Content-Language" content="en" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@emilkowalski_" />
+    <meta name="author" content="Emil Kowalski / JeanxPereira" />
+    <!-- FAVICONS -->
+    <meta name="msapplication-TileColor" content="#ffffff" />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="shortcut icon" href="public/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="puapple-touch-icon.png" />
+    <!-- STYLES -->
+    <link href="https://fonts.cdnfonts.com/css/sf-pro-display" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/sf-mono" rel="stylesheet">
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/globals.css">
+    <link rel="stylesheet" href="styles/code-block.module.css">
+    <link rel="stylesheet" href="styles/copy.module.css">
+    <link rel="stylesheet" href="styles/footer.module.css">
+    <link rel="stylesheet" href="styles/hero.module.css">
+    <link rel="stylesheet" href="styles/installation.module.css">
+    <link rel="stylesheet" href="styles/other.module.css">
+    <link rel="stylesheet" href="sonner-js/sonner.css">
+    <link rel="stylesheet" href="prism.css">
+  </head>
+  <body>
+    <div class="wrapper light">
+      <div id="toaster-wrapper" data-rich-colors="true" data-expand="false" data-position="bottom-right"></div>
+      <main class="container">
+        <!-- HERO -->
+        <div class=hero-wrapper>
+          <div class=hero-toastWrapper>
+            <div class=hero-toast></div>
+            <div class=hero-toast></div>
+            <div class=hero-toast></div>
+          </div>
+          <h1 class=hero-heading>Sonner JS</h1>
+          <p style="margin-top: 0; font-size: 18px; text-align: center;">An opinionated toast component for Vanilla HTML/JS.</p>
+          <div class=hero-buttons>
+            <button class="hero-button" data-primary onclick="toast.message('Sonner JS', { description: 'An opinionated toast component for Vanilla.' })">Render a toast</button>
+            <a class=hero-button href="https://github.com/JeanxPereira/sonner-js" target="_blank">GitHub</a>
+          </div>
+          <a class=hero-link href="https://github.com/emilkowalski/sonner" target="_blank">Documentation</a>
+        </div>
+        <div class="content">
+          <!-- INSTALLATION -->
+          <div>
+            <h2>Installation</h2>
+            <code id="installation-code" class="installation-code" onclick="onCopy()">
+              npm install sonner-js
+              <button id="copy-button" aria-label="Copy code" class="installation-copy">
+                <span id="copy-icon"></span>
+              </button>
+            </code>
+          </div>          
 
-    .container {
-      max-width: 800px;
-      margin: 12rem auto;
-      text-align: center;
-    }
+          <!-- USAGE -->
+          <div>
+            <h2>Usage</h2>
+            <p>Render the toaster in the root of your app.</p>
+            <button class="copy-button" aria-label="Copy code" class="installation-copy">
+              <span id="copy-icon"></span>
+            </button>
+            <pre class="codeBlock-fixed" data-src-status="loaded" tabindex="0"><code class="language-html">&lt;head&gt;
+  &lt;link rel="stylesheet" href="sonner-js/sonner.css"&gt;
+  &lt;script defer src="sonner-js/sonner.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
 
-    h1 {
-      font-size: 2.5rem;
-    }
+&lt;body&gt;
+  &lt;div id="toaster-wrapper"&gt;&lt;/div&gt;
+  &lt;button class="button"
+  onclick="toast.default('Event has been created')"&gt;Default&lt;/button&gt;
+&lt;/body&gt;</code></pre>
+          </div>
+            
+          <!-- TYPES -->
+          <div>
+            <h2>Types</h2>
+            <p>You can customize the type of toast you want to render, and pass an options object as the second argument.</p>
+            <div class="buttons">
+                <button class="button" data-active="true" onclick="toast.default('Event has been created')">Default</button>
+                <button class="button" data-active="false" onclick="toast.message('Event has been created', { description: 'Monday, January 3rd at 6:00pm' })">Description</button>
+                <button class="button" data-active="false" onclick="toast.success('Event has been created')">Success</button>
+                <button class="button" data-active="false" onclick="toast.info('Be at the area 10 minutes before the event time', { richColors: true })">Info</button>
+                <button class="button" data-active="false" onclick="toast.warning('Event start time cannot be earlier than 8am', { richColors: true })">Warning</button>
+                <button class="button" data-active="false" onclick="toast.error('Event has not been created', { richColors: true })">Error</button>
+                <button class="button" data-active="false" onclick="toast.default('Event has been created', { action: { label: 'Undo', onClick: () => console.log('Undo') } })">Action</button>
+                <button class="button" data-active="false" onclick="triggerPromise()">Promise</button>
+                <button class="button" data-active="false" onclick="toast.custom('<div>A custom toast with default styling</div>')">Custom</button>
+            </div>
+            <div class=codeBlock-fixed> &lt;script src="sonner-js/toaster.js"&gt;&lt;/script&gt; <br> &lt;script src="sonner-js/toaster.js"&gt;&lt;/script&gt; <br>
+            </div>
+          </div>
 
-    .button {
-      display: inline-block;
-      margin: 10px;
-      font-size: 1rem;
-      cursor: pointer;
-      border: none;
-      color: white;
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <div>
-      <button class="button" onclick="toast.default('Event has been created')">Default</button>
-      <button class="button" onclick="toast.message('Event has been created', { description: 'Monday, January 3rd at 6:00pm' })">Description</button>
-      <button class="button" onclick="toast.success('Event has been created', { richColors: true })">Success</button>
-      <button class="button" onclick="toast.info('Be at the area 10 minutes before the event time', { richColors: true })">Info</button>
-      <button class="button" onclick="toast.warning('Event start time cannot be earlier than 8am', { richColors: true })">Warning</button>
-      <button class="button" onclick="toast.error('Event has not been created', { richColors: true })">Error</button>
-      <button class="button" onclick="toast.default('Event has been created', { action: { label: 'Undo', onClick: () => console.log('Undo') } })">Action</button>
-      <button class="button" onclick="triggerPromise()">Promise</button>
-      <button class="button" onclick="toast.custom('<div>A custom toast with default styling</div>')">Custom</button>
+          <!-- POSITIONS -->
+          <div>
+            <h2>Position</h2>
+            <p>Swipe direction changes depending on the position.</p>
+            <div class="buttons">
+                <button data-active="false" class="button">top-left</button>
+                <button data-active="false" class="button">top-center</button>
+                <button data-active="false" class="button">top-right</button>
+                <button data-active="false" class="button">bottom-left</button>
+                <button data-active="false" class="button">bottom-center</button>
+                <button data-active="true" class="button">bottom-right</button>
+            </div>
+            <div class=codeBlock-fixed> &lt;script src="sonner-js/toaster.js"&gt;&lt;/script&gt; <br> &lt;script src="sonner-js/toaster.js"&gt;&lt;/script&gt; <br>
+            </div>
+          </div>
+          <!-- EXPAND MODES -->
+          <div>
+            <h2>Expand</h2>
+            <p>
+              You can change the amount of toasts visible through the <code>visibleToasts</code> prop.
+            </p>
+            <div class="buttons">
+              <button class="button">Expand</button>
+              <button class="button">Default</button>
+            </div>
+            <div class=codeBlock-fixed> &lt;script src="sonner-js/toaster.js"&gt;&lt;/script&gt; <br> &lt;script src="sonner-js/toaster.js"&gt;&lt;/script&gt; <br>
+            </div>
+          
+          <!-- OTHER -->
+          <div>
+            <h2>Other</h2>
+            <div class="buttons">
+                <button class="button">Rich Colors Success</button>
+                <button class="button">Rich Colors Error</button>
+                <button class="button">Rich Colors Info</button>
+                <button class="button">Rich Colors Warning</button>
+                <button class="button">Close Button</button>
+                <button class="button">Headless</button>
+            </div>
+          </div>
+          <!-- HOW -->
+          <div>
+            <h2>Want to learn how to make components like this one?</h2>
+            <p>
+              Emil is working on a course about animations on the web, you can check it out
+              <a href="https://animations.dev/" target="_blank" style="text-decoration: underline;">
+                here
+              </a>
+              .
+            </p>
+          </div>
+        </div>
+      </main>
     </div>
-  </div>
-
-  <!-- Wrapper necessário para os toasts -->
-  <div id="toaster-wrapper" data-rich-colors="true" data-expand="false" data-position="top-left"></div>
-
-  <!-- Carregando o script do toaster -->
-  <script src="toaster.js"></script>
-
-  <!-- Script específico da página -->
-  <script>
-    function triggerPromise() {
-      const promise = () => new Promise((resolve) => setTimeout(() => resolve({ name: 'Sonner' }), 2000));
-      toast.promise(promise(), {
-        loading: 'Loading...',
-        success: (data) => `${data.name} toast has been added`,
-        error: 'Error',
-      });
-    }
-
-    // Exemplo de toasts automáticos
-    toast.success('This is a success message!', {
-      position: 'top-center'
-    });
-
-    toast.error('This is an error message!', {
-      position: 'bottom-left'
-    });
-
-    toast.info('This is an info message!', {
-      position: 'top-right',
-      action: {
-        label: 'Retry',
-        onClick: () => console.log('Retry clicked')
-      }
-    });
-  </script>
-</body>
+    
+    <footer class=footer-wrapper>
+        <div class="container">
+          <p class=footer-p>
+            <img alt="Emil's profile picture" src="https://github.com/emilkowalski.png" style="width: 2.4rem; height: 2.4rem;"/>
+            <span>
+              Made by <a href="https://twitter.com/emilkowalski_" target="_blank">Emil</a>
+            </span>
+          </p>
+          <p class="footer-p">
+            <img alt="Emil's profile picture" src="https://github.com/jeanxpereira.png" style="width: 2.4rem; height: 2.4rem;"/>
+            <span>
+              And ported to Vanilla by <a href="https://twitter.com/emilkowalski_" target="_blank">JeanxPereira.</a>
+            </span>
+          </p>
+        </div>
+      </footer>
+      <script defer src="sonner-js/sonner.js"></script>
+      <script defer src="prism.js"></script>
+      <script defer src="main.js"></script>
+  </body>
 </html>

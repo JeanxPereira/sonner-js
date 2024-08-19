@@ -1,0 +1,67 @@
+.installation-code {
+  padding: 0 6.2rem 0 1.2rem;
+  border-radius: .6rem;
+  background: linear-gradient(to top, var(--gray2), var(--gray1) .8rem);
+  font-family: var(--font-mono);
+  font-size: 1.4rem;
+  position: relative;
+  cursor: copy;
+  height: 4.0rem;
+  border: .1rem solid var(--gray3);
+  display: flex;
+  align-items: center;
+  color: var(--gray12);
+}
+
+.installation-copy {
+  position: absolute;
+  right: .6rem;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  border-radius: 50%;
+  border: none;
+  border: .1rem solid var(--gray4);
+  background: #fff;
+  color: var(--gray12);
+  border-radius: .5rem;
+  width: 2.6rem;
+  height: 2.6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.installation-copy div {
+  display: flex;
+}
+
+.fade-in {
+  animation: fadeEffectIn 0.3s forwards;
+}
+
+.fade-out {
+  animation: fadeEffectOut 0.3s forwards;
+}
+
+@keyframes fadeEffectIn {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeEffectOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+}
